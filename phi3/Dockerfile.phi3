@@ -1,5 +1,11 @@
 FROM ollama/ollama
 
+# Start Ollama temporarily to pull the model
+RUN ollama serve & \
+    sleep 5 && \
+    ollama pull phi3:mini && \
+    pkill ollama
+
 EXPOSE 11434
 
 ENV OLLAMA_HOST=0.0.0.0:11434
